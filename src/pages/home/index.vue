@@ -40,7 +40,7 @@
         </el-menu>
       </el-col>
       <el-col :span="20">
-        <div style="display:flex;align-items:center">
+        <div style="display:flex; align-items:center">
           <p>昵称:{{userInfo.nickname}}</p>
           <el-button @click="signOut" type="success">退出登录</el-button>
         </div>
@@ -84,3 +84,10 @@ export default {
   }
 };
 </script>
+<style lang="less" scoped>
+.home-container {
+  .el-menu {
+    border: none;
+  }
+}
+</style>

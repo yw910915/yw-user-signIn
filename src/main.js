@@ -9,7 +9,7 @@ import './styles/common.css'
 import axios from "axios"
 
 //将Axios挂载到vue的原型中
-Vue.prototype.$http=axios;
+Vue.prototype.$http = axios;
 //全局配置baseURL
 axios.defaults.baseURL = 'http://www.litc.pro:9999/v1';
 
@@ -18,7 +18,7 @@ axios.defaults.baseURL = 'http://www.litc.pro:9999/v1';
 axios.interceptors.request.use(function (config) {
   // console.log(config)
   // 在发送请求之前做些什么
-  let token=localStorage.getItem("token") || ''
+  let token = localStorage.getItem("token") || ''
   config.headers.Authorization = token
   return config;
 }, function (error) {
@@ -29,10 +29,18 @@ axios.interceptors.request.use(function (config) {
 // 添加响应拦截器
 axios.interceptors.response.use(function (response) {
   // 对响应数据做点什么
+  // console.log('我是拦截器拦截到的response:', response)
+  response = response.data
   return response;
 }, function (error) {
   // 对响应错误做点什么
-  // response = response.data
+  // console.log('我是拦截器拦截到的error:', error)
+  // console.dir(err);
+  Vue.prototype.$message({
+    showClose: true,
+    type: "error",
+    message: err.response.data.errMsg
+  });
   return Promise.reject(error);
 });
 
@@ -44,9 +52,9 @@ axios.interceptors.response.use(function (response) {
 router.beforeEach((to, from, next) => {
   // console.log(to,from)
   //获取localStorage中的token
-  let token=localStorage.getItem('token') || ''
-  if(token && to.path==='/signIn'){
-    next('/home')
+  let token = localStorage.getItem('token') || ''
+  if (token && to.path === '/signIn') {
+    return next('/home')
   }
 
   //拦截未登陆的状态
@@ -54,9 +62,9 @@ router.beforeEach((to, from, next) => {
   //存在表示已登陆
   //判断如果用户登录了就正常导航
   //登录页面也不能进行拦截,应当放行
-  if(token || to.path==='/signIn'){
+  if (token || to.path === '/signIn') {
     next()
-  }else{
+  } else {
     //如果没有登录  就跳转回 /
     next('/')
   }

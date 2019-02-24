@@ -48,7 +48,7 @@ export default {
             message: result.data.succMsg
           });
           
-          localStorage.setItem("token",result.data.data.token)
+          localStorage.setItem("token",result.data.token)
           localStorage.setItem("userInfo",JSON.stringify(result.data))
           this.$router.push('/home')
         })

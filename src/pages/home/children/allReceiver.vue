@@ -95,22 +95,19 @@ export default {
     getAllReceiver() {
       let token = localStorage.getItem("token") || "";
       this.$http
-        .get("/users/getReceiverAddress", {
-          // headers: {'X-Requested-With': 'XMLHttpRequest'},
-          headers: { Authorization: token }
-        })
+        .get("/users/getReceiverAddress")
         .then(result => {
-          console.log(result);
-          this.receiverData = result.data.data
+          // console.log(result);
+          this.receiverData = result.data
         })
-        .catch(err => {
-          // console.dir(err);
-          this.$message({
-            showClose: true,
-            type: "error",
-            message: err.response.data.errMsg
-          });
-        });
+        // .catch(err => {
+        //   // console.dir(err);
+        //   this.$message({
+        //     showClose: true,
+        //     type: "error",
+        //     message: err.response.data.errMsg
+        //   });
+        // });
     }
   }
 };
