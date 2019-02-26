@@ -42,16 +42,58 @@ export default {
     };
   },
   created() {
-      this.getVCode()
+    this.getVCode();
   },
   methods: {
-      getVCode(){
-        this.$http.get("/users/getVCode").then(result=>{
-            console.log(result)
-            this.vCodeSvg=result
+    getVCode() {
+      this.$http.get("/users/getVCode").then(result => {
+        // console.log(result);
+        this.vCodeSvg = result;
+      });
+    },
+    signUp() {
+      let {
+        username,
+        password,
+        passwordConfirm,
+        nickname,
+        mobile,
+        vCode
+      } = this;
+      if (
+        !username.trim() ||
+        !password.trim() ||
+        !passwordConfirm.trim() ||
+        !nickname.trim() ||
+        !mobile.trim() ||
+        !vCode.trim()
+      )
+        return this.$message({
+          type: "error",
+          message: "请检查以上内容是否均已填写!"
+        });
+      this.$http
+        .post("/users/register", {
+          username,
+          nickname,
+          password,
+          vCode,
+          mobile
         })
-      }
-  },
+        .then(result=>{
+            console.log(result)
+            if (result.status === 200) {
+            this.$message({
+              type: 'success',
+              message: result.succMsg
+            })
+            localStorage.setItem('token', result.data.token)
+            localStorage.setItem('userInfo', JSON.stringify(result.data))
+            this.$router.push('/')
+          }
+        })
+    }
+  }
 };
 </script>
 <style lang="less">
