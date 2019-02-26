@@ -53,14 +53,14 @@ export default {
           localStorage.setItem("userInfo",JSON.stringify(result.data))
           this.$router.push('/home')
         })
-        .catch(err => {
-          // console.dir(err);
-          this.$message({
-            showClose: true,
-            message: err.response.data.errMsg,
-            type: "error"
-          });
-        });
+        // .catch(err => {
+        //   // console.dir(err);
+        //   this.$message({
+        //     showClose: true,
+        //     message: err.response.data.errMsg,
+        //     type: "error"
+        //   });
+        // });
     }
   }
 };
