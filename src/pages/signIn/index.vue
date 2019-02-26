@@ -10,6 +10,7 @@
       </el-form-item>
       <el-form-item>
         <el-button type="primary" @click="signIn">登录</el-button>
+        <router-link to="/signUp">没有账号?去注册!</router-link>
       </el-form-item>
     </el-form>
   </div>
@@ -66,7 +67,7 @@ export default {
 </script>
 <style lang="less" scoped>
 .sign-in-container {
-  width: 400px;
+  width: 600px;
   height: 600px;
   position: absolute;
   left: 0;
@@ -84,7 +85,7 @@ export default {
   }
   .el-button {
     margin-left: 50%;
-    transform: translate(-35px, 0);
+    transform: translate(-100px, 0);
   }
 }
 </style>

@@ -62,7 +62,7 @@ router.beforeEach((to, from, next) => {
   //存在表示已登陆
   //判断如果用户登录了就正常导航
   //登录页面也不能进行拦截,应当放行
-  if (token || to.path === '/signIn') {
+  if (token || to.path === '/signIn' ||to.path==='/signUp') {
     next()
   } else {
     //如果没有登录  就跳转回 /
