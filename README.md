@@ -27,3 +27,5 @@ yarn run lint
 
 ### Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).
+
+###接口文档http://litc.pro:9999/#api-1_Users_Sign-register
