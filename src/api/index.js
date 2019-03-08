@@ -48,7 +48,7 @@ axios.interceptors.request.use(function (config) {
     Vue.prototype.$message({
       showClose: true,
       type: "error",
-      message: err.response.data.errMsg
+      message: error.response.data.errMsg
     });
     if (error.response.data.status === 401) {
         // 跳转到登录页
